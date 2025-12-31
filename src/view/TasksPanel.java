@@ -7,6 +7,7 @@ import model.Project;
 import model.Task;
 import util.ArabicUIHelper;
 import util.SessionManager;
+import java.util.stream.Collectors;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -47,15 +48,12 @@ public class TasksPanel extends JPanel {
         setBackground(new Color(250, 250, 250));
         ArabicUIHelper.applyRTL(this);
         
-        // Header panel
         JPanel headerPanel = createHeaderPanel();
         add(headerPanel, BorderLayout.NORTH);
         
-        // Table panel
         JPanel tablePanel = createTablePanel();
         add(tablePanel, BorderLayout.CENTER);
         
-        // Button panel
         JPanel buttonPanel = createButtonPanel();
         add(buttonPanel, BorderLayout.SOUTH);
     }
@@ -64,25 +62,21 @@ public class TasksPanel extends JPanel {
         JPanel panel = ArabicUIHelper.createPanel(new BorderLayout(10, 10));
         panel.setOpaque(false);
         
-        // Title
         JLabel titleLabel = ArabicUIHelper.createTitleLabel("إدارة المهام");
         titleLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         panel.add(titleLabel, BorderLayout.NORTH);
         
-        // Filter panel
         JPanel filterPanel = ArabicUIHelper.createPanel(new FlowLayout(FlowLayout.RIGHT, 10, 5));
         filterPanel.setOpaque(false);
         
-        // Project filter
         filterPanel.add(ArabicUIHelper.createLabel("المشروع:"));
         projectFilter = ArabicUIHelper.createComboBox();
         projectFilter.setPreferredSize(new Dimension(150, 30));
-        projectFilter.addItem(null); // All projects
+        projectFilter.addItem(null);
         loadProjectsFilter();
         projectFilter.addActionListener(e -> filterTasks());
         filterPanel.add(projectFilter);
         
-        // Status filter
         filterPanel.add(ArabicUIHelper.createLabel("الحالة:"));
         String[] statuses = {"الكل", "للتنفيذ", "قيد التنفيذ", "قيد المراجعة", "مكتملة", "معلقة"};
         statusFilter = ArabicUIHelper.createComboBox(statuses);
@@ -90,7 +84,6 @@ public class TasksPanel extends JPanel {
         statusFilter.addActionListener(e -> filterTasks());
         filterPanel.add(statusFilter);
         
-        // Priority filter
         filterPanel.add(ArabicUIHelper.createLabel("الأولوية:"));
         String[] priorities = {"الكل", "منخفضة", "متوسطة", "عالية", "حرجة"};
         priorityFilter = ArabicUIHelper.createComboBox(priorities);
@@ -98,7 +91,6 @@ public class TasksPanel extends JPanel {
         priorityFilter.addActionListener(e -> filterTasks());
         filterPanel.add(priorityFilter);
         
-        // Search
         filterPanel.add(ArabicUIHelper.createLabel("بحث:"));
         searchField = ArabicUIHelper.createTextField(12);
         searchField.setPreferredSize(new Dimension(120, 30));
@@ -120,7 +112,7 @@ public class TasksPanel extends JPanel {
         panel.setBackground(Color.WHITE);
         panel.setBorder(BorderFactory.createLineBorder(new Color(230, 230, 230)));
         
-        // Table columns
+        
         String[] columns = {"#", "المهمة", "المشروع", "المسؤول", "الأولوية", 
                            "الحالة", "تاريخ الاستحقاق", "نسبة الإكمال"};
         
@@ -136,7 +128,7 @@ public class TasksPanel extends JPanel {
         tasksTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tasksTable.setRowHeight(35);
         
-        // Column widths
+        
         tasksTable.getColumnModel().getColumn(0).setPreferredWidth(40);
         tasksTable.getColumnModel().getColumn(1).setPreferredWidth(200);
         tasksTable.getColumnModel().getColumn(2).setPreferredWidth(150);
@@ -146,7 +138,7 @@ public class TasksPanel extends JPanel {
         tasksTable.getColumnModel().getColumn(6).setPreferredWidth(110);
         tasksTable.getColumnModel().getColumn(7).setPreferredWidth(100);
         
-        // Double click to view details
+        
         tasksTable.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -236,7 +228,7 @@ public class TasksPanel extends JPanel {
             protected List<Task> doInBackground() throws Exception {
                 int userId = SessionManager.getInstance().getCurrentUserId();
                 if (SessionManager.getInstance().isProjectManager()) {
-                    // Get all tasks from all projects
+                    
                     List<Project> projects = projectDAO.findAll();
                     java.util.ArrayList<Task> allTasks = new java.util.ArrayList<>();
                     for (Project p : projects) {
@@ -294,19 +286,16 @@ public class TasksPanel extends JPanel {
         
         List<Task> filtered = currentTasks.stream()
             .filter(t -> {
-                // Project filter
                 Project selectedProject = (Project) projectFilter.getSelectedItem();
                 if (selectedProject != null && t.getProjectId() != selectedProject.getId()) {
                     return false;
                 }
                 
-                // Status filter
                 int selectedStatus = statusFilter.getSelectedIndex();
                 if (selectedStatus > 0 && t.getStatusId() != selectedStatus) {
                     return false;
                 }
                 
-                // Priority filter
                 int selectedPriority = priorityFilter.getSelectedIndex();
                 if (selectedPriority > 0 && t.getPriorityId() != selectedPriority) {
                     return false;
@@ -314,7 +303,7 @@ public class TasksPanel extends JPanel {
                 
                 return true;
             })
-            .toList();
+            .collect(Collectors.toList());
         
         updateTable(filtered);
     }
@@ -394,7 +383,7 @@ public class TasksPanel extends JPanel {
         
         Task task = currentTasks.get(selectedRow);
         
-        // Show progress update dialog
+        
         String input = JOptionPane.showInputDialog(this, 
             "أدخل نسبة الإكمال (0-100):", 
             String.valueOf((int) task.getCompletionPercentage()));

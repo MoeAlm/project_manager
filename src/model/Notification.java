@@ -28,7 +28,7 @@ public class Notification {
         this.isRead = false;
     }
     
-    // Getters and Setters
+    
     public int getId() {
         return id;
     }

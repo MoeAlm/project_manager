@@ -44,17 +44,14 @@ public class AddMemberDialog extends JDialog {
         JPanel mainPanel = ArabicUIHelper.createPanel(new BorderLayout(10, 10));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         
-        // Title
         JLabel titleLabel = ArabicUIHelper.createTitleLabel("إضافة عضو جديد");
         mainPanel.add(titleLabel, BorderLayout.NORTH);
         
-        // Form panel
         JPanel formPanel = ArabicUIHelper.createPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(10, 5, 10, 5);
         
-        // User selection
         gbc.gridx = 0; gbc.gridy = 0; gbc.weightx = 0.3;
         formPanel.add(ArabicUIHelper.createLabel("المستخدم: *"), gbc);
         gbc.gridx = 1; gbc.weightx = 0.7;
@@ -62,7 +59,6 @@ public class AddMemberDialog extends JDialog {
         userComboBox.setPreferredSize(new Dimension(200, 32));
         formPanel.add(userComboBox, gbc);
         
-        // Role selection
         gbc.gridx = 0; gbc.gridy = 1; gbc.weightx = 0.3;
         formPanel.add(ArabicUIHelper.createLabel("الدور: *"), gbc);
         gbc.gridx = 1; gbc.weightx = 0.7;
@@ -72,7 +68,6 @@ public class AddMemberDialog extends JDialog {
         
         mainPanel.add(formPanel, BorderLayout.CENTER);
         
-        // Buttons
         JPanel buttonPanel = ArabicUIHelper.createPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
         
         JButton addButton = ArabicUIHelper.createSuccessButton("إضافة");
@@ -92,27 +87,22 @@ public class AddMemberDialog extends JDialog {
     
     private void loadData() {
         try {
-            // Load all active users
             List<User> allUsers = userDAO.findAllActive();
             
-            // Get existing members
             List<ProjectMember> existingMembers = memberDAO.findByProject(project.getId());
             
-            // Filter out existing members
             for (User user : allUsers) {
                 boolean isMember = existingMembers.stream()
                     .anyMatch(m -> m.getUserId() == user.getId());
                 
-                // Also check if user is the project manager
                 if (!isMember && user.getId() != project.getManagerId()) {
                     userComboBox.addItem(user);
                 }
             }
             
-            // Load project roles
             projectRoles = memberDAO.getAllProjectRoles();
             for (Object[] role : projectRoles) {
-                roleComboBox.addItem((String) role[2]); // role_name_ar
+                roleComboBox.addItem((String) role[2]);
             }
             
         } catch (SQLException e) {
@@ -137,7 +127,7 @@ public class AddMemberDialog extends JDialog {
         int roleId = (int) projectRoles.get(selectedRoleIndex)[0];
         
         try {
-            // Check if already a member
+            
             if (memberDAO.isMember(project.getId(), selectedUser.getId())) {
                 ArabicUIHelper.showWarning(this, "هذا المستخدم عضو في المشروع بالفعل", "تنبيه");
                 return;

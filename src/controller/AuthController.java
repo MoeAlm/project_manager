@@ -51,7 +51,7 @@ public class AuthController {
                     if (user != null) {
                         SessionManager.getInstance().setCurrentUser(user);
                         
-                        // Log activity
+                        
                         try {
                             ActivityLog log = new ActivityLog(
                                 user.getId(),
@@ -86,12 +86,12 @@ public class AuthController {
         SwingWorker<Integer, Void> worker = new SwingWorker<>() {
             @Override
             protected Integer doInBackground() throws Exception {
-                // Check if username exists
+                
                 if (userDAO.usernameExists(username)) {
                     throw new Exception("اسم المستخدم موجود مسبقاً");
                 }
                 
-                // Check if email exists
+                
                 if (email != null && !email.isEmpty() && userDAO.emailExists(email)) {
                     throw new Exception("البريد الإلكتروني مستخدم مسبقاً");
                 }
@@ -105,7 +105,7 @@ public class AuthController {
                 try {
                     int userId = get();
                     if (userId > 0) {
-                        // Log activity
+                        
                         try {
                             ActivityLog log = new ActivityLog(
                                 userId,

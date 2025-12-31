@@ -24,7 +24,6 @@ public class Project {
     private Timestamp createdAt;
     private Timestamp updatedAt;
     
-    // Additional fields for display
     private int taskCount;
     private int memberCount;
     
@@ -36,11 +35,10 @@ public class Project {
         this.startDate = startDate;
         this.endDate = endDate;
         this.managerId = managerId;
-        this.statusId = 1; // NOT_STARTED
+        this.statusId = 1;
         this.completionPercentage = 0.0;
     }
     
-    // Getters and Setters
     public int getId() {
         return id;
     }

@@ -47,15 +47,15 @@ public class TeamPanel extends JPanel {
         setBackground(new Color(250, 250, 250));
         ArabicUIHelper.applyRTL(this);
         
-        // Header panel
+        
         JPanel headerPanel = createHeaderPanel();
         add(headerPanel, BorderLayout.NORTH);
         
-        // Table panel
+        
         JPanel tablePanel = createTablePanel();
         add(tablePanel, BorderLayout.CENTER);
         
-        // Button panel
+        
         JPanel buttonPanel = createButtonPanel();
         add(buttonPanel, BorderLayout.SOUTH);
     }
@@ -64,12 +64,12 @@ public class TeamPanel extends JPanel {
         JPanel panel = ArabicUIHelper.createPanel(new BorderLayout(10, 10));
         panel.setOpaque(false);
         
-        // Title
+        
         JLabel titleLabel = ArabicUIHelper.createTitleLabel("إدارة الفريق");
         titleLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         panel.add(titleLabel, BorderLayout.NORTH);
         
-        // Filter panel
+        
         JPanel filterPanel = ArabicUIHelper.createPanel(new FlowLayout(FlowLayout.RIGHT, 10, 5));
         filterPanel.setOpaque(false);
         
@@ -94,7 +94,7 @@ public class TeamPanel extends JPanel {
         panel.setBackground(Color.WHITE);
         panel.setBorder(BorderFactory.createLineBorder(new Color(230, 230, 230)));
         
-        // Table columns
+        
         String[] columns = {"#", "الاسم", "اسم المستخدم", "الدور في المشروع", 
                            "تاريخ الانضمام", "المهام الكلية", "المهام المكتملة", "نسبة الإنجاز"};
         
@@ -110,7 +110,7 @@ public class TeamPanel extends JPanel {
         membersTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         membersTable.setRowHeight(35);
         
-        // Column widths
+        
         membersTable.getColumnModel().getColumn(0).setPreferredWidth(40);
         membersTable.getColumnModel().getColumn(1).setPreferredWidth(150);
         membersTable.getColumnModel().getColumn(2).setPreferredWidth(120);

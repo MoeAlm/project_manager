@@ -63,12 +63,12 @@ public class TaskDialog extends JDialog {
         JPanel mainPanel = ArabicUIHelper.createPanel(new BorderLayout(10, 10));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         
-        // Title
+        
         String title = task == null ? "إضافة مهمة جديدة" : "تعديل المهمة";
         JLabel titleLabel = ArabicUIHelper.createTitleLabel(title);
         mainPanel.add(titleLabel, BorderLayout.NORTH);
         
-        // Form panel
+        
         JPanel formPanel = ArabicUIHelper.createPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -76,7 +76,7 @@ public class TaskDialog extends JDialog {
         
         int row = 0;
         
-        // Project
+        
         gbc.gridx = 0; gbc.gridy = row; gbc.weightx = 0.3;
         formPanel.add(ArabicUIHelper.createLabel("المشروع: *"), gbc);
         gbc.gridx = 1; gbc.weightx = 0.7;
@@ -86,7 +86,7 @@ public class TaskDialog extends JDialog {
         
         row++;
         
-        // Task name
+        
         gbc.gridx = 0; gbc.gridy = row; gbc.weightx = 0.3;
         formPanel.add(ArabicUIHelper.createLabel("اسم المهمة: *"), gbc);
         gbc.gridx = 1; gbc.weightx = 0.7;
@@ -95,7 +95,7 @@ public class TaskDialog extends JDialog {
         
         row++;
         
-        // Description
+        
         gbc.gridx = 0; gbc.gridy = row; gbc.weightx = 0.3;
         formPanel.add(ArabicUIHelper.createLabel("الوصف:"), gbc);
         gbc.gridx = 1; gbc.weightx = 0.7;
@@ -106,7 +106,7 @@ public class TaskDialog extends JDialog {
         
         row++;
         
-        // Assignee
+        
         gbc.gridx = 0; gbc.gridy = row; gbc.weightx = 0.3;
         formPanel.add(ArabicUIHelper.createLabel("المسؤول:"), gbc);
         gbc.gridx = 1; gbc.weightx = 0.7;
@@ -115,7 +115,7 @@ public class TaskDialog extends JDialog {
         
         row++;
         
-        // Priority
+        
         gbc.gridx = 0; gbc.gridy = row; gbc.weightx = 0.3;
         formPanel.add(ArabicUIHelper.createLabel("الأولوية: *"), gbc);
         gbc.gridx = 1; gbc.weightx = 0.7;
@@ -124,7 +124,7 @@ public class TaskDialog extends JDialog {
         
         row++;
         
-        // Status
+        
         gbc.gridx = 0; gbc.gridy = row; gbc.weightx = 0.3;
         formPanel.add(ArabicUIHelper.createLabel("الحالة: *"), gbc);
         gbc.gridx = 1; gbc.weightx = 0.7;
@@ -133,7 +133,7 @@ public class TaskDialog extends JDialog {
         
         row++;
         
-        // Due date
+        
         gbc.gridx = 0; gbc.gridy = row; gbc.weightx = 0.3;
         formPanel.add(ArabicUIHelper.createLabel("تاريخ الاستحقاق: (YYYY-MM-DD)"), gbc);
         gbc.gridx = 1; gbc.weightx = 0.7;
@@ -142,7 +142,7 @@ public class TaskDialog extends JDialog {
         
         row++;
         
-        // Completion percentage
+        
         gbc.gridx = 0; gbc.gridy = row; gbc.weightx = 0.3;
         formPanel.add(ArabicUIHelper.createLabel("نسبة الإكمال:"), gbc);
         gbc.gridx = 1; gbc.weightx = 0.7;
@@ -153,7 +153,7 @@ public class TaskDialog extends JDialog {
         
         mainPanel.add(formPanel, BorderLayout.CENTER);
         
-        // Buttons
+        
         JPanel buttonPanel = ArabicUIHelper.createPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
         
         JButton saveButton = ArabicUIHelper.createSuccessButton("حفظ");
@@ -173,7 +173,7 @@ public class TaskDialog extends JDialog {
     
     private void loadData() {
         try {
-            // Load projects
+            
             int userId = SessionManager.getInstance().getCurrentUserId();
             List<Project> projects;
             if (SessionManager.getInstance().isProjectManager()) {
@@ -185,20 +185,20 @@ public class TaskDialog extends JDialog {
                 projectComboBox.addItem(p);
             }
             
-            // Load priorities
+            
             priorities = taskDAO.getAllPriorities();
             for (Object[] priority : priorities) {
                 priorityComboBox.addItem((String) priority[2]); // priority_name_ar
             }
             priorityComboBox.setSelectedIndex(1); // Default: Medium
             
-            // Load statuses
+            
             statuses = taskDAO.getAllStatuses();
             for (Object[] status : statuses) {
                 statusComboBox.addItem((String) status[2]); // status_name_ar
             }
             
-            // Load members for first project
+            
             if (projectComboBox.getItemCount() > 0) {
                 loadProjectMembers();
             }
@@ -227,7 +227,7 @@ public class TaskDialog extends JDialog {
     }
     
     private void populateFields() {
-        // Set project
+        
         for (int i = 0; i < projectComboBox.getItemCount(); i++) {
             if (projectComboBox.getItemAt(i).getId() == task.getProjectId()) {
                 projectComboBox.setSelectedIndex(i);
@@ -238,7 +238,7 @@ public class TaskDialog extends JDialog {
         nameField.setText(task.getTaskName());
         descriptionArea.setText(task.getDescription());
         
-        // Load members and set assignee
+        
         loadProjectMembers();
         if (task.getAssignedTo() > 0) {
             for (int i = 0; i < assigneeComboBox.getItemCount(); i++) {
@@ -250,27 +250,27 @@ public class TaskDialog extends JDialog {
             }
         }
         
-        // Set priority
+        
         priorityComboBox.setSelectedIndex(task.getPriorityId() - 1);
         
-        // Set status
+        
         statusComboBox.setSelectedIndex(task.getStatusId() - 1);
         
-        // Set due date
+        
         if (task.getDueDate() != null) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             dueDateField.setText(dateFormat.format(task.getDueDate()));
         }
         
-        // Set completion
+        
         completionSpinner.setValue((int) task.getCompletionPercentage());
         
-        // Disable project change for existing task
+        
         projectComboBox.setEnabled(false);
     }
     
     private void save() {
-        // Validation
+        
         Project selectedProject = (Project) projectComboBox.getSelectedItem();
         if (selectedProject == null) {
             ArabicUIHelper.showError(this, "الرجاء اختيار المشروع", "خطأ");
@@ -306,7 +306,7 @@ public class TaskDialog extends JDialog {
         
         try {
             if (task == null) {
-                // Create new task
+                
                 Task newTask = new Task(
                     selectedProject.getId(),
                     name,
@@ -321,7 +321,7 @@ public class TaskDialog extends JDialog {
                 
                 int taskId = taskDAO.create(newTask);
                 if (taskId > 0) {
-                    // Update project completion
+                    
                     projectDAO.updateCompletionPercentage(selectedProject.getId());
                     confirmed = true;
                     ArabicUIHelper.showInfo(this, "تم إنشاء المهمة بنجاح", "نجاح");
@@ -330,7 +330,7 @@ public class TaskDialog extends JDialog {
                     ArabicUIHelper.showError(this, "فشل في إنشاء المهمة", "خطأ");
                 }
             } else {
-                // Update existing task
+                
                 task.setTaskName(name);
                 task.setDescription(descriptionArea.getText().trim());
                 task.setAssignedTo(assignedTo);
@@ -340,7 +340,7 @@ public class TaskDialog extends JDialog {
                 task.setCompletionPercentage(completion);
                 
                 if (taskDAO.update(task)) {
-                    // Update project completion
+                    
                     projectDAO.updateCompletionPercentage(task.getProjectId());
                     confirmed = true;
                     ArabicUIHelper.showInfo(this, "تم تحديث المهمة بنجاح", "نجاح");

@@ -42,15 +42,15 @@ public class ProjectDetailsDialog extends JDialog {
         JPanel mainPanel = ArabicUIHelper.createPanel(new BorderLayout(10, 10));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
         
-        // Header with project info
+        
         JPanel headerPanel = createHeaderPanel();
         mainPanel.add(headerPanel, BorderLayout.NORTH);
         
-        // Tabbed pane for tasks and members
+        
         tabbedPane = ArabicUIHelper.createTabbedPane();
         mainPanel.add(tabbedPane, BorderLayout.CENTER);
         
-        // Close button
+        
         JPanel buttonPanel = ArabicUIHelper.createPanel(new FlowLayout(FlowLayout.CENTER));
         JButton closeBtn = ArabicUIHelper.createSecondaryButton("إغلاق");
         closeBtn.setPreferredSize(new Dimension(100, 35));
@@ -69,12 +69,12 @@ public class ProjectDetailsDialog extends JDialog {
             BorderFactory.createEmptyBorder(15, 20, 15, 20)
         ));
         
-        // Title
+        
         JLabel titleLabel = ArabicUIHelper.createLabel(project.getProjectName(), 20);
         titleLabel.setFont(ArabicUIHelper.getArabicFontBold(20));
         panel.add(titleLabel, BorderLayout.NORTH);
         
-        // Info grid
+        
         JPanel infoPanel = ArabicUIHelper.createPanel(new GridLayout(2, 4, 20, 10));
         infoPanel.setOpaque(false);
         
@@ -93,7 +93,7 @@ public class ProjectDetailsDialog extends JDialog {
         
         panel.add(infoPanel, BorderLayout.CENTER);
         
-        // Description
+        
         if (project.getDescription() != null && !project.getDescription().isEmpty()) {
             JPanel descPanel = ArabicUIHelper.createPanel(new BorderLayout());
             descPanel.setOpaque(false);
@@ -162,7 +162,7 @@ public class ProjectDetailsDialog extends JDialog {
             
             tasksPanel.add(ArabicUIHelper.createScrollPane(table), BorderLayout.CENTER);
             
-            // Summary
+            
             JPanel summaryPanel = ArabicUIHelper.createPanel(new FlowLayout(FlowLayout.RIGHT));
             summaryPanel.add(ArabicUIHelper.createLabel("إجمالي المهام: " + tasks.size()));
             tasksPanel.add(summaryPanel, BorderLayout.SOUTH);
@@ -208,7 +208,7 @@ public class ProjectDetailsDialog extends JDialog {
             
             membersPanel.add(ArabicUIHelper.createScrollPane(table), BorderLayout.CENTER);
             
-            // Summary
+            
             JPanel summaryPanel = ArabicUIHelper.createPanel(new FlowLayout(FlowLayout.RIGHT));
             summaryPanel.add(ArabicUIHelper.createLabel("إجمالي الأعضاء: " + members.size()));
             membersPanel.add(summaryPanel, BorderLayout.SOUTH);

@@ -28,7 +28,6 @@ public class ReportsPanel extends JPanel {
     private TaskDAO taskDAO;
     private UserDAO userDAO;
     
-    // Tables
     private JTable completedProjectsTable;
     private JTable overdueTasksTable;
     private JTable memberPerformanceTable;
@@ -51,29 +50,23 @@ public class ReportsPanel extends JPanel {
         setBackground(new Color(250, 250, 250));
         ArabicUIHelper.applyRTL(this);
         
-        // Title
         JLabel titleLabel = ArabicUIHelper.createTitleLabel("التقارير");
         titleLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         add(titleLabel, BorderLayout.NORTH);
         
-        // Reports tabs
         reportsTabs = ArabicUIHelper.createTabbedPane();
         
-        // Completed projects tab
         JPanel completedProjectsPanel = createCompletedProjectsPanel();
         reportsTabs.addTab("المشاريع المكتملة", completedProjectsPanel);
         
-        // Overdue tasks tab
         JPanel overdueTasksPanel = createOverdueTasksPanel();
         reportsTabs.addTab("المهام المتأخرة", overdueTasksPanel);
         
-        // Member performance tab
         JPanel memberPerformancePanel = createMemberPerformancePanel();
         reportsTabs.addTab("أداء الأعضاء", memberPerformancePanel);
         
         add(reportsTabs, BorderLayout.CENTER);
         
-        // Refresh button panel
         JPanel buttonPanel = ArabicUIHelper.createPanel(new FlowLayout(FlowLayout.RIGHT));
         buttonPanel.setOpaque(false);
         
@@ -95,7 +88,6 @@ public class ReportsPanel extends JPanel {
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         panel.setBackground(Color.WHITE);
         
-        // Summary
         JPanel summaryPanel = ArabicUIHelper.createPanel(new FlowLayout(FlowLayout.RIGHT));
         summaryPanel.setBackground(new Color(232, 245, 233));
         summaryPanel.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15));
@@ -103,7 +95,6 @@ public class ReportsPanel extends JPanel {
         summaryPanel.add(summaryLabel);
         panel.add(summaryPanel, BorderLayout.NORTH);
         
-        // Table
         String[] columns = {"#", "اسم المشروع", "المدير", "تاريخ البدء", "تاريخ الانتهاء", "عدد المهام"};
         completedProjectsModel = new DefaultTableModel(columns, 0) {
             @Override
@@ -127,7 +118,6 @@ public class ReportsPanel extends JPanel {
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         panel.setBackground(Color.WHITE);
         
-        // Summary
         JPanel summaryPanel = ArabicUIHelper.createPanel(new FlowLayout(FlowLayout.RIGHT));
         summaryPanel.setBackground(new Color(255, 235, 238));
         summaryPanel.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15));
@@ -135,7 +125,6 @@ public class ReportsPanel extends JPanel {
         summaryPanel.add(summaryLabel);
         panel.add(summaryPanel, BorderLayout.NORTH);
         
-        // Table
         String[] columns = {"#", "المهمة", "المشروع", "المسؤول", "الأولوية", "تاريخ الاستحقاق", "أيام التأخير"};
         overdueTasksModel = new DefaultTableModel(columns, 0) {
             @Override
@@ -159,7 +148,6 @@ public class ReportsPanel extends JPanel {
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         panel.setBackground(Color.WHITE);
         
-        // Summary
         JPanel summaryPanel = ArabicUIHelper.createPanel(new FlowLayout(FlowLayout.RIGHT));
         summaryPanel.setBackground(new Color(227, 242, 253));
         summaryPanel.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15));
@@ -167,7 +155,6 @@ public class ReportsPanel extends JPanel {
         summaryPanel.add(summaryLabel);
         panel.add(summaryPanel, BorderLayout.NORTH);
         
-        // Table
         String[] columns = {"#", "العضو", "الدور", "المهام الكلية", "المهام المكتملة", 
                            "المهام المتأخرة", "نسبة الإنجاز"};
         memberPerformanceModel = new DefaultTableModel(columns, 0) {
@@ -344,17 +331,14 @@ public class ReportsPanel extends JPanel {
                 return;
         }
         
-        // Simple CSV export
         StringBuilder sb = new StringBuilder();
         
-        // Headers
         for (int i = 0; i < table.getColumnCount(); i++) {
             sb.append(table.getColumnName(i));
             if (i < table.getColumnCount() - 1) sb.append(",");
         }
         sb.append("\n");
         
-        // Data
         for (int row = 0; row < table.getRowCount(); row++) {
             for (int col = 0; col < table.getColumnCount(); col++) {
                 Object value = table.getValueAt(row, col);

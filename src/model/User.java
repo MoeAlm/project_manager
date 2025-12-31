@@ -33,7 +33,7 @@ public class User {
         this.isActive = true;
     }
     
-    // Getters and Setters
+    
     public int getId() {
         return id;
     }

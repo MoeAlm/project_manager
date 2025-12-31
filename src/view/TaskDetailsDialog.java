@@ -36,15 +36,15 @@ public class TaskDetailsDialog extends JDialog {
         JPanel mainPanel = ArabicUIHelper.createPanel(new BorderLayout(10, 10));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
         
-        // Header with task info
+        
         JPanel headerPanel = createHeaderPanel();
         mainPanel.add(headerPanel, BorderLayout.NORTH);
         
-        // Activity log
+        
         JPanel activityPanel = createActivityPanel();
         mainPanel.add(activityPanel, BorderLayout.CENTER);
         
-        // Close button
+        
         JPanel buttonPanel = ArabicUIHelper.createPanel(new FlowLayout(FlowLayout.CENTER));
         JButton closeBtn = ArabicUIHelper.createSecondaryButton("إغلاق");
         closeBtn.setPreferredSize(new Dimension(100, 35));
@@ -63,12 +63,12 @@ public class TaskDetailsDialog extends JDialog {
             BorderFactory.createEmptyBorder(15, 20, 15, 20)
         ));
         
-        // Title
+        
         JLabel titleLabel = ArabicUIHelper.createLabel(task.getTaskName(), 18);
         titleLabel.setFont(ArabicUIHelper.getArabicFontBold(18));
         panel.add(titleLabel, BorderLayout.NORTH);
         
-        // Info grid
+        
         JPanel infoPanel = ArabicUIHelper.createPanel(new GridLayout(3, 3, 15, 8));
         infoPanel.setOpaque(false);
         
@@ -87,7 +87,7 @@ public class TaskDetailsDialog extends JDialog {
         addInfoItem(infoPanel, "تاريخ الإنشاء:", 
             task.getCreatedAt() != null ? dateFormat.format(task.getCreatedAt()) : "-");
         
-        // Overdue indicator
+        
         if (task.isOverdue()) {
             JLabel overdueLabel = ArabicUIHelper.createLabel("⚠ متأخرة");
             overdueLabel.setForeground(new Color(244, 67, 54));
@@ -97,7 +97,7 @@ public class TaskDetailsDialog extends JDialog {
         
         panel.add(infoPanel, BorderLayout.CENTER);
         
-        // Description
+        
         if (task.getDescription() != null && !task.getDescription().isEmpty()) {
             JPanel descPanel = ArabicUIHelper.createPanel(new BorderLayout());
             descPanel.setOpaque(false);

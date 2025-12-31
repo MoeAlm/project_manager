@@ -28,7 +28,7 @@ public class ActivityLog {
         this.entityId = entityId;
     }
     
-    // Getters and Setters
+    
     public int getId() {
         return id;
     }
@@ -93,7 +93,7 @@ public class ActivityLog {
         this.createdAt = createdAt;
     }
     
-    // Action types constants
+    
     public static class ActionTypes {
         public static final String CREATE = "CREATE";
         public static final String UPDATE = "UPDATE";
@@ -104,7 +104,7 @@ public class ActivityLog {
         public static final String COMPLETE = "COMPLETE";
     }
     
-    // Entity types constants
+    
     public static class EntityTypes {
         public static final String USER = "USER";
         public static final String PROJECT = "PROJECT";

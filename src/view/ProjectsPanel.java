@@ -43,15 +43,12 @@ public class ProjectsPanel extends JPanel {
         setBackground(new Color(250, 250, 250));
         ArabicUIHelper.applyRTL(this);
         
-        // Header panel
         JPanel headerPanel = createHeaderPanel();
         add(headerPanel, BorderLayout.NORTH);
         
-        // Table panel
         JPanel tablePanel = createTablePanel();
         add(tablePanel, BorderLayout.CENTER);
         
-        // Button panel
         JPanel buttonPanel = createButtonPanel();
         add(buttonPanel, BorderLayout.SOUTH);
     }
@@ -60,16 +57,13 @@ public class ProjectsPanel extends JPanel {
         JPanel panel = ArabicUIHelper.createPanel(new BorderLayout(10, 10));
         panel.setOpaque(false);
         
-        // Title
         JLabel titleLabel = ArabicUIHelper.createTitleLabel("إدارة المشاريع");
         titleLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         panel.add(titleLabel, BorderLayout.NORTH);
         
-        // Search and filter panel
         JPanel filterPanel = ArabicUIHelper.createPanel(new FlowLayout(FlowLayout.RIGHT, 10, 5));
         filterPanel.setOpaque(false);
         
-        // Status filter
         filterPanel.add(ArabicUIHelper.createLabel("الحالة:"));
         String[] statuses = {"الكل", "لم يبدأ", "قيد التنفيذ", "متوقف", "مكتمل", "ملغي"};
         statusFilter = ArabicUIHelper.createComboBox(statuses);
@@ -77,7 +71,6 @@ public class ProjectsPanel extends JPanel {
         statusFilter.addActionListener(e -> filterProjects());
         filterPanel.add(statusFilter);
         
-        // Search
         filterPanel.add(ArabicUIHelper.createLabel("بحث:"));
         searchField = ArabicUIHelper.createTextField(15);
         searchField.setPreferredSize(new Dimension(150, 30));
@@ -99,7 +92,7 @@ public class ProjectsPanel extends JPanel {
         panel.setBackground(Color.WHITE);
         panel.setBorder(BorderFactory.createLineBorder(new Color(230, 230, 230)));
         
-        // Table columns
+        
         String[] columns = {"#", "اسم المشروع", "المدير", "تاريخ البدء", "تاريخ الانتهاء", 
                            "الحالة", "نسبة الإكمال", "المهام", "الأعضاء"};
         
@@ -115,7 +108,7 @@ public class ProjectsPanel extends JPanel {
         projectsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         projectsTable.setRowHeight(35);
         
-        // Column widths
+        
         projectsTable.getColumnModel().getColumn(0).setPreferredWidth(40);
         projectsTable.getColumnModel().getColumn(1).setPreferredWidth(200);
         projectsTable.getColumnModel().getColumn(2).setPreferredWidth(120);
@@ -126,7 +119,7 @@ public class ProjectsPanel extends JPanel {
         projectsTable.getColumnModel().getColumn(7).setPreferredWidth(60);
         projectsTable.getColumnModel().getColumn(8).setPreferredWidth(60);
         
-        // Double click to view details
+        
         projectsTable.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -233,7 +226,7 @@ public class ProjectsPanel extends JPanel {
         } else {
             List<Project> filtered = currentProjects.stream()
                 .filter(p -> p.getStatusId() == selectedStatus)
-                .toList();
+                .collect(java.util.stream.Collectors.toList());
             updateTable(filtered);
         }
     }

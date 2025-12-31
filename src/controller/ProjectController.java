@@ -41,7 +41,6 @@ public class ProjectController {
                 try {
                     boolean success = get();
                     if (success) {
-                        // Log activity
                         try {
                             ActivityLog log = new ActivityLog(
                                 SessionManager.getInstance().getCurrentUserId(),
@@ -84,7 +83,6 @@ public class ProjectController {
                 try {
                     boolean success = get();
                     if (success) {
-                        // Log activity
                         try {
                             ActivityLog log = new ActivityLog(
                                 SessionManager.getInstance().getCurrentUserId(),

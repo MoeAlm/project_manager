@@ -19,7 +19,7 @@ public class ProjectMember {
     private String projectRoleNameAr;
     private Timestamp joinedAt;
     
-    // Performance metrics
+    
     private int totalTasks;
     private int completedTasks;
     private double completionRate;
@@ -32,7 +32,7 @@ public class ProjectMember {
         this.projectRoleId = projectRoleId;
     }
     
-    // Getters and Setters
+    
     public int getId() {
         return id;
     }

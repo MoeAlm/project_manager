@@ -38,11 +38,11 @@ public class NotificationsDialog extends JDialog {
         JPanel mainPanel = ArabicUIHelper.createPanel(new BorderLayout(10, 10));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
         
-        // Title
+        
         JLabel titleLabel = ArabicUIHelper.createTitleLabel("الإشعارات");
         mainPanel.add(titleLabel, BorderLayout.NORTH);
         
-        // Table
+        
         String[] columns = {"#", "العنوان", "الرسالة", "التاريخ", "الحالة"};
         tableModel = new DefaultTableModel(columns, 0) {
             @Override
@@ -64,7 +64,7 @@ public class NotificationsDialog extends JDialog {
         JScrollPane scrollPane = ArabicUIHelper.createScrollPane(notificationsTable);
         mainPanel.add(scrollPane, BorderLayout.CENTER);
         
-        // Buttons
+        
         JPanel buttonPanel = ArabicUIHelper.createPanel(new FlowLayout(FlowLayout.RIGHT, 10, 5));
         
         JButton markReadBtn = ArabicUIHelper.createPrimaryButton("تحديد كمقروء");

@@ -39,12 +39,12 @@ public class RegisterView extends JFrame {
         setResizable(false);
         ArabicUIHelper.applyRTL(this);
         
-        // Main panel
+        
         JPanel mainPanel = ArabicUIHelper.createPanel(new BorderLayout(10, 10));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 40));
         mainPanel.setBackground(new Color(245, 245, 245));
         
-        // Title panel
+        
         JPanel titlePanel = ArabicUIHelper.createPanel(new BorderLayout());
         titlePanel.setBackground(new Color(245, 245, 245));
         
@@ -55,7 +55,7 @@ public class RegisterView extends JFrame {
         
         mainPanel.add(titlePanel, BorderLayout.NORTH);
         
-        // Form panel
+        
         JPanel formPanel = ArabicUIHelper.createPanel(new GridBagLayout());
         formPanel.setBackground(new Color(245, 245, 245));
         GridBagConstraints gbc = new GridBagConstraints();
@@ -64,7 +64,7 @@ public class RegisterView extends JFrame {
         
         int row = 0;
         
-        // Username
+        
         gbc.gridx = 0;
         gbc.gridy = row;
         gbc.weightx = 0.3;
@@ -78,7 +78,7 @@ public class RegisterView extends JFrame {
         
         row++;
         
-        // Password
+        
         gbc.gridx = 0;
         gbc.gridy = row;
         gbc.weightx = 0.3;
@@ -92,7 +92,7 @@ public class RegisterView extends JFrame {
         
         row++;
         
-        // Confirm Password
+        
         gbc.gridx = 0;
         gbc.gridy = row;
         gbc.weightx = 0.3;
@@ -106,7 +106,7 @@ public class RegisterView extends JFrame {
         
         row++;
         
-        // Full Name
+        
         gbc.gridx = 0;
         gbc.gridy = row;
         gbc.weightx = 0.3;
@@ -120,7 +120,7 @@ public class RegisterView extends JFrame {
         
         row++;
         
-        // Email
+        
         gbc.gridx = 0;
         gbc.gridy = row;
         gbc.weightx = 0.3;
@@ -134,7 +134,7 @@ public class RegisterView extends JFrame {
         
         row++;
         
-        // Phone
+        
         gbc.gridx = 0;
         gbc.gridy = row;
         gbc.weightx = 0.3;
@@ -148,7 +148,7 @@ public class RegisterView extends JFrame {
         
         row++;
         
-        // Role
+        
         gbc.gridx = 0;
         gbc.gridy = row;
         gbc.weightx = 0.3;
@@ -163,7 +163,7 @@ public class RegisterView extends JFrame {
         
         mainPanel.add(formPanel, BorderLayout.CENTER);
         
-        // Button panel
+        
         JPanel buttonPanel = ArabicUIHelper.createPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
         buttonPanel.setBackground(new Color(245, 245, 245));
         
@@ -178,7 +178,7 @@ public class RegisterView extends JFrame {
         buttonPanel.add(registerButton);
         buttonPanel.add(backButton);
         
-        // Note panel
+        
         JPanel notePanel = ArabicUIHelper.createPanel(new BorderLayout());
         notePanel.setBackground(new Color(245, 245, 245));
         JLabel noteLabel = ArabicUIHelper.createLabel("* الحقول المطلوبة", 12);
@@ -190,7 +190,7 @@ public class RegisterView extends JFrame {
         
         add(mainPanel);
         
-        // Window close listener
+        
         addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent e) {
@@ -208,7 +208,7 @@ public class RegisterView extends JFrame {
         String phone = phoneField.getText().trim();
         int roleId = roleComboBox.getSelectedIndex() + 1;
         
-        // Validation
+        
         if (!ValidationHelper.isValidUsername(username)) {
             ArabicUIHelper.showError(this, ValidationHelper.ErrorMessages.INVALID_USERNAME, "خطأ");
             usernameField.requestFocus();

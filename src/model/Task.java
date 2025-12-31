@@ -42,11 +42,10 @@ public class Task {
         this.priorityId = priorityId;
         this.dueDate = dueDate;
         this.createdBy = createdBy;
-        this.statusId = 1; // TODO
+        this.statusId = 1;
         this.completionPercentage = 0.0;
     }
     
-    // Getters and Setters
     public int getId() {
         return id;
     }
@@ -217,7 +216,7 @@ public class Task {
     
     public boolean isOverdue() {
         if (dueDate == null) return false;
-        if (statusId == 4) return false; // COMPLETED
+        if (statusId == 4) return false;
         return dueDate.before(new java.util.Date());
     }
     

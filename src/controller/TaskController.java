@@ -42,7 +42,7 @@ public class TaskController {
             protected Boolean doInBackground() throws Exception {
                 boolean success = taskDAO.delete(taskId);
                 if (success) {
-                    // Update project completion
+                    
                     projectDAO.updateCompletionPercentage(projectId);
                 }
                 return success;
@@ -53,7 +53,7 @@ public class TaskController {
                 try {
                     boolean success = get();
                     if (success) {
-                        // Log activity
+                        
                         try {
                             ActivityLog log = new ActivityLog(
                                 SessionManager.getInstance().getCurrentUserId(),
@@ -89,7 +89,7 @@ public class TaskController {
             protected Boolean doInBackground() throws Exception {
                 boolean success = taskDAO.updateCompletion(taskId, percentage);
                 if (success) {
-                    // Update project completion
+                    
                     projectDAO.updateCompletionPercentage(projectId);
                 }
                 return success;
@@ -100,7 +100,7 @@ public class TaskController {
                 try {
                     boolean success = get();
                     if (success) {
-                        // Log activity
+                        
                         try {
                             String description = percentage >= 100 ? 
                                 "إكمال المهمة رقم: " + taskId :
@@ -143,7 +143,7 @@ public class TaskController {
             protected Boolean doInBackground() throws Exception {
                 boolean success = taskDAO.updateStatus(taskId, statusId);
                 if (success) {
-                    // Update project completion
+                    
                     projectDAO.updateCompletionPercentage(projectId);
                 }
                 return success;
@@ -154,7 +154,7 @@ public class TaskController {
                 try {
                     boolean success = get();
                     if (success) {
-                        // Log activity
+                        
                         try {
                             ActivityLog log = new ActivityLog(
                                 SessionManager.getInstance().getCurrentUserId(),
@@ -192,7 +192,7 @@ public class TaskController {
                 boolean success = taskDAO.update(task);
                 
                 if (success && assigneeId > 0) {
-                    // Send notification to assignee
+                    
                     Notification notification = new Notification(
                         assigneeId,
                         "مهمة جديدة",
@@ -212,7 +212,7 @@ public class TaskController {
                 try {
                     boolean success = get();
                     if (success) {
-                        // Log activity
+                        
                         try {
                             ActivityLog log = new ActivityLog(
                                 SessionManager.getInstance().getCurrentUserId(),

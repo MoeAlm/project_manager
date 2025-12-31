@@ -10,10 +10,8 @@ import javax.swing.*;
  */
 public class Main {
     public static void main(String[] args) {
-        // Set Arabic Look and Feel
         ArabicUIHelper.setArabicLookAndFeel();
         
-        // Test database connection
         if (!DatabaseConnection.testConnection()) {
             JOptionPane.showMessageDialog(null,
                 "فشل الاتصال بقاعدة البيانات!\n" +
@@ -25,7 +23,6 @@ public class Main {
             System.exit(1);
         }
         
-        // Launch application on Event Dispatch Thread
         SwingUtilities.invokeLater(() -> {
             try {
                 LoginView loginView = new LoginView();

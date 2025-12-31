@@ -59,12 +59,12 @@ public class ProjectDialog extends JDialog {
         JPanel mainPanel = ArabicUIHelper.createPanel(new BorderLayout(10, 10));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         
-        // Title
+        
         String title = project == null ? "إضافة مشروع جديد" : "تعديل المشروع";
         JLabel titleLabel = ArabicUIHelper.createTitleLabel(title);
         mainPanel.add(titleLabel, BorderLayout.NORTH);
         
-        // Form panel
+        
         JPanel formPanel = ArabicUIHelper.createPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -72,7 +72,7 @@ public class ProjectDialog extends JDialog {
         
         int row = 0;
         
-        // Project name
+        
         gbc.gridx = 0; gbc.gridy = row; gbc.weightx = 0.3;
         formPanel.add(ArabicUIHelper.createLabel("اسم المشروع: *"), gbc);
         gbc.gridx = 1; gbc.weightx = 0.7;
@@ -81,7 +81,7 @@ public class ProjectDialog extends JDialog {
         
         row++;
         
-        // Description
+        
         gbc.gridx = 0; gbc.gridy = row; gbc.weightx = 0.3;
         formPanel.add(ArabicUIHelper.createLabel("الوصف:"), gbc);
         gbc.gridx = 1; gbc.weightx = 0.7;
@@ -92,7 +92,7 @@ public class ProjectDialog extends JDialog {
         
         row++;
         
-        // Start date
+        
         gbc.gridx = 0; gbc.gridy = row; gbc.weightx = 0.3;
         formPanel.add(ArabicUIHelper.createLabel("تاريخ البدء: * (YYYY-MM-DD)"), gbc);
         gbc.gridx = 1; gbc.weightx = 0.7;
@@ -102,7 +102,7 @@ public class ProjectDialog extends JDialog {
         
         row++;
         
-        // End date
+        
         gbc.gridx = 0; gbc.gridy = row; gbc.weightx = 0.3;
         formPanel.add(ArabicUIHelper.createLabel("تاريخ الانتهاء: (YYYY-MM-DD)"), gbc);
         gbc.gridx = 1; gbc.weightx = 0.7;
@@ -111,7 +111,7 @@ public class ProjectDialog extends JDialog {
         
         row++;
         
-        // Status
+        
         gbc.gridx = 0; gbc.gridy = row; gbc.weightx = 0.3;
         formPanel.add(ArabicUIHelper.createLabel("الحالة: *"), gbc);
         gbc.gridx = 1; gbc.weightx = 0.7;
@@ -120,7 +120,7 @@ public class ProjectDialog extends JDialog {
         
         row++;
         
-        // Manager
+        
         gbc.gridx = 0; gbc.gridy = row; gbc.weightx = 0.3;
         formPanel.add(ArabicUIHelper.createLabel("المدير: *"), gbc);
         gbc.gridx = 1; gbc.weightx = 0.7;
@@ -129,7 +129,7 @@ public class ProjectDialog extends JDialog {
         
         mainPanel.add(formPanel, BorderLayout.CENTER);
         
-        // Buttons
+        
         JPanel buttonPanel = ArabicUIHelper.createPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
         
         saveButton = ArabicUIHelper.createSuccessButton("حفظ");
@@ -149,19 +149,19 @@ public class ProjectDialog extends JDialog {
     
     private void loadData() {
         try {
-            // Load statuses
+            
             statuses = projectDAO.getAllStatuses();
             for (Object[] status : statuses) {
                 statusComboBox.addItem((String) status[2]); // status_name_ar
             }
             
-            // Load managers (project managers only)
+            
             List<User> managers = userDAO.findByRole(1); // PROJECT_MANAGER role
             for (User manager : managers) {
                 managerComboBox.addItem(manager);
             }
             
-            // Set current user as default manager
+            
             User currentUser = SessionManager.getInstance().getCurrentUser();
             for (int i = 0; i < managerComboBox.getItemCount(); i++) {
                 if (managerComboBox.getItemAt(i).getId() == currentUser.getId()) {
@@ -187,10 +187,10 @@ public class ProjectDialog extends JDialog {
             endDateField.setText(dateFormat.format(project.getEndDate()));
         }
         
-        // Set status
+        
         statusComboBox.setSelectedIndex(project.getStatusId() - 1);
         
-        // Set manager
+        
         for (int i = 0; i < managerComboBox.getItemCount(); i++) {
             if (managerComboBox.getItemAt(i).getId() == project.getManagerId()) {
                 managerComboBox.setSelectedIndex(i);
@@ -200,7 +200,7 @@ public class ProjectDialog extends JDialog {
     }
     
     private void save() {
-        // Validation
+        
         String name = nameField.getText().trim();
         if (!ValidationHelper.isNotEmpty(name)) {
             ArabicUIHelper.showError(this, "الرجاء إدخال اسم المشروع", "خطأ");
@@ -253,7 +253,7 @@ public class ProjectDialog extends JDialog {
         
         try {
             if (project == null) {
-                // Create new project
+                
                 Project newProject = new Project(name, descriptionArea.getText().trim(), 
                     startDate, endDate, selectedManager.getId());
                 newProject.setStatusId(statusId);
@@ -267,7 +267,7 @@ public class ProjectDialog extends JDialog {
                     ArabicUIHelper.showError(this, "فشل في إنشاء المشروع", "خطأ");
                 }
             } else {
-                // Update existing project
+                
                 project.setProjectName(name);
                 project.setDescription(descriptionArea.getText().trim());
                 project.setStartDate(startDate);

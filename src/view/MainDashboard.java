@@ -26,7 +26,6 @@ public class MainDashboard extends JFrame {
     private TaskDAO taskDAO;
     private NotificationDAO notificationDAO;
     
-    // Panels
     private JPanel dashboardPanel;
     private ProjectsPanel projectsPanel;
     private TasksPanel tasksPanel;
@@ -49,39 +48,30 @@ public class MainDashboard extends JFrame {
         setMinimumSize(new Dimension(1000, 600));
         ArabicUIHelper.applyRTL(this);
         
-        // Menu bar
         setJMenuBar(createMenuBar());
         
-        // Main panel
         JPanel mainPanel = ArabicUIHelper.createPanel(new BorderLayout());
         
-        // Header panel
         JPanel headerPanel = createHeaderPanel();
         mainPanel.add(headerPanel, BorderLayout.NORTH);
         
-        // Tabbed pane
         tabbedPane = ArabicUIHelper.createTabbedPane();
         tabbedPane.setFont(ArabicUIHelper.getArabicFont(14));
         
-        // Dashboard tab
         dashboardPanel = createDashboardPanel();
         tabbedPane.addTab("لوحة التحكم", new ImageIcon(), dashboardPanel);
         
-        // Projects tab
         projectsPanel = new ProjectsPanel(this);
         tabbedPane.addTab("المشاريع", new ImageIcon(), projectsPanel);
         
-        // Tasks tab
         tasksPanel = new TasksPanel(this);
         tabbedPane.addTab("المهام", new ImageIcon(), tasksPanel);
         
-        // Team tab (only for project managers)
         if (SessionManager.getInstance().isProjectManager()) {
             teamPanel = new TeamPanel(this);
             tabbedPane.addTab("الفريق", new ImageIcon(), teamPanel);
         }
         
-        // Reports tab
         reportsPanel = new ReportsPanel(this);
         tabbedPane.addTab("التقارير", new ImageIcon(), reportsPanel);
         
@@ -93,7 +83,6 @@ public class MainDashboard extends JFrame {
     private JMenuBar createMenuBar() {
         JMenuBar menuBar = ArabicUIHelper.createMenuBar();
         
-        // File menu
         JMenu fileMenu = ArabicUIHelper.createMenu("ملف");
         
         JMenuItem refreshItem = ArabicUIHelper.createMenuItem("تحديث");
@@ -108,7 +97,6 @@ public class MainDashboard extends JFrame {
         
         menuBar.add(fileMenu);
         
-        // Projects menu
         JMenu projectsMenu = ArabicUIHelper.createMenu("المشاريع");
         
         if (SessionManager.getInstance().isProjectManager()) {
@@ -126,7 +114,6 @@ public class MainDashboard extends JFrame {
         
         menuBar.add(projectsMenu);
         
-        // Tasks menu
         JMenu tasksMenu = ArabicUIHelper.createMenu("المهام");
         
         JMenuItem myTasksItem = ArabicUIHelper.createMenuItem("مهامي");
@@ -135,7 +122,6 @@ public class MainDashboard extends JFrame {
         
         menuBar.add(tasksMenu);
         
-        // Reports menu
         JMenu reportsMenu = ArabicUIHelper.createMenu("التقارير");
         
         JMenuItem viewReportsItem = ArabicUIHelper.createMenuItem("عرض التقارير");
@@ -147,7 +133,6 @@ public class MainDashboard extends JFrame {
         
         menuBar.add(reportsMenu);
         
-        // Help menu
         JMenu helpMenu = ArabicUIHelper.createMenu("مساعدة");
         
         JMenuItem aboutItem = ArabicUIHelper.createMenuItem("حول البرنامج");
@@ -164,13 +149,11 @@ public class MainDashboard extends JFrame {
         headerPanel.setBackground(new Color(33, 150, 243));
         headerPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
         
-        // Title
         JLabel titleLabel = ArabicUIHelper.createLabel("نظام إدارة المشاريع", 20);
         titleLabel.setForeground(Color.WHITE);
         titleLabel.setFont(ArabicUIHelper.getArabicFontBold(20));
         headerPanel.add(titleLabel, BorderLayout.EAST);
         
-        // User info panel
         JPanel userPanel = ArabicUIHelper.createPanel(new FlowLayout(FlowLayout.LEFT, 15, 0));
         userPanel.setOpaque(false);
         
@@ -184,7 +167,6 @@ public class MainDashboard extends JFrame {
         roleLabel.setForeground(new Color(200, 230, 255));
         userPanel.add(roleLabel);
         
-        // Notification button
         JButton notificationBtn = ArabicUIHelper.createButton("الإشعارات");
         notificationBtn.setForeground(Color.WHITE);
         notificationBtn.setBackground(new Color(25, 118, 210));
@@ -192,7 +174,6 @@ public class MainDashboard extends JFrame {
         notificationBtn.addActionListener(e -> showNotifications());
         userPanel.add(notificationBtn);
         
-        // Logout button
         JButton logoutBtn = ArabicUIHelper.createButton("تسجيل الخروج");
         logoutBtn.setForeground(Color.WHITE);
         logoutBtn.setBackground(new Color(211, 47, 47));
@@ -210,7 +191,6 @@ public class MainDashboard extends JFrame {
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         panel.setBackground(new Color(250, 250, 250));
         
-        // Welcome message
         JPanel welcomePanel = ArabicUIHelper.createPanel(new BorderLayout());
         welcomePanel.setBackground(Color.WHITE);
         welcomePanel.setBorder(BorderFactory.createCompoundBorder(
@@ -225,7 +205,6 @@ public class MainDashboard extends JFrame {
         
         panel.add(welcomePanel, BorderLayout.NORTH);
         
-        // Statistics panel
         JPanel statsPanel = ArabicUIHelper.createPanel(new GridLayout(2, 2, 15, 15));
         statsPanel.setOpaque(false);
         
@@ -305,7 +284,6 @@ public class MainDashboard extends JFrame {
         statsPanel.add(createStatCard("المهام المتأخرة", String.valueOf(overdueTasks), 
                                       new Color(244, 67, 54)));
         
-        // Find the center component and update
         Component centerComponent = ((BorderLayout) dashboardPanel.getLayout())
             .getLayoutComponent(BorderLayout.CENTER);
         if (centerComponent != null) {

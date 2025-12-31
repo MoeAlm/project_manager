@@ -31,12 +31,12 @@ public class LoginView extends JFrame {
         setResizable(false);
         ArabicUIHelper.applyRTL(this);
         
-        // Main panel
+        
         JPanel mainPanel = ArabicUIHelper.createPanel(new BorderLayout(10, 10));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(30, 40, 30, 40));
         mainPanel.setBackground(new Color(245, 245, 245));
         
-        // Title panel
+        
         JPanel titlePanel = ArabicUIHelper.createPanel(new BorderLayout());
         titlePanel.setBackground(new Color(245, 245, 245));
         
@@ -52,14 +52,14 @@ public class LoginView extends JFrame {
         
         mainPanel.add(titlePanel, BorderLayout.NORTH);
         
-        // Form panel
+        
         JPanel formPanel = ArabicUIHelper.createPanel(new GridBagLayout());
         formPanel.setBackground(new Color(245, 245, 245));
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(10, 5, 10, 5);
         
-        // Username
+        
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.weightx = 0.3;
@@ -72,7 +72,7 @@ public class LoginView extends JFrame {
         usernameField.setPreferredSize(new Dimension(200, 35));
         formPanel.add(usernameField, gbc);
         
-        // Password
+        
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.weightx = 0.3;
@@ -87,7 +87,7 @@ public class LoginView extends JFrame {
         
         mainPanel.add(formPanel, BorderLayout.CENTER);
         
-        // Button panel
+        
         JPanel buttonPanel = ArabicUIHelper.createPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
         buttonPanel.setBackground(new Color(245, 245, 245));
         
@@ -106,11 +106,11 @@ public class LoginView extends JFrame {
         
         add(mainPanel);
         
-        // Enter key listener
+        
         passwordField.addActionListener(e -> handleLogin());
         usernameField.addActionListener(e -> passwordField.requestFocus());
         
-        // Set focus
+        
         SwingUtilities.invokeLater(() -> usernameField.requestFocus());
     }
     

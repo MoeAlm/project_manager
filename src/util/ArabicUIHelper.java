@@ -24,19 +24,19 @@ public class ArabicUIHelper {
     
     private static void initializeFont() {
         try {
-            // Try to load Amiri font from resources
+            
             InputStream fontStream = ArabicUIHelper.class.getResourceAsStream("/fonts/Amiri-Regular.ttf");
             if (fontStream != null) {
                 arabicFont = Font.createFont(Font.TRUETYPE_FONT, fontStream).deriveFont((float) DEFAULT_FONT_SIZE);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
                 ge.registerFont(arabicFont);
             } else {
-                // Fallback to system Arabic fonts
+                
                 arabicFont = new Font("Arial", Font.PLAIN, DEFAULT_FONT_SIZE);
             }
             arabicFontBold = arabicFont.deriveFont(Font.BOLD);
         } catch (Exception e) {
-            // Fallback to system fonts that support Arabic
+            
             arabicFont = new Font("Arial", Font.PLAIN, DEFAULT_FONT_SIZE);
             arabicFontBold = new Font("Arial", Font.BOLD, DEFAULT_FONT_SIZE);
         }
@@ -273,7 +273,7 @@ public class ArabicUIHelper {
         table.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         table.setRowHeight(30);
         
-        // تعيين محاذاة الخلايا لليمين
+        
         DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
         rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
         rightRenderer.setFont(arabicFont);
@@ -282,7 +282,7 @@ public class ArabicUIHelper {
             table.getColumnModel().getColumn(i).setCellRenderer(rightRenderer);
         }
         
-        // تعيين خط رأس الجدول
+        
         JTableHeader header = table.getTableHeader();
         header.setFont(arabicFontBold);
         header.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
@@ -430,7 +430,7 @@ public class ArabicUIHelper {
             e.printStackTrace();
         }
         
-        // تعيين الخطوط الافتراضية
+        
         UIManager.put("Label.font", arabicFont);
         UIManager.put("Button.font", arabicFont);
         UIManager.put("TextField.font", arabicFont);
@@ -449,13 +449,13 @@ public class ArabicUIHelper {
         UIManager.put("CheckBox.font", arabicFont);
         UIManager.put("RadioButton.font", arabicFont);
         
-        // ترجمة أزرار OptionPane
+        
         UIManager.put("OptionPane.yesButtonText", "نعم");
         UIManager.put("OptionPane.noButtonText", "لا");
         UIManager.put("OptionPane.cancelButtonText", "إلغاء");
         UIManager.put("OptionPane.okButtonText", "موافق");
         
-        // ترجمة FileChooser
+        
         UIManager.put("FileChooser.openButtonText", "فتح");
         UIManager.put("FileChooser.saveButtonText", "حفظ");
         UIManager.put("FileChooser.cancelButtonText", "إلغاء");
