@@ -14,8 +14,6 @@ public class LoginView extends JFrame {
     
     private JTextField usernameField;
     private JPasswordField passwordField;
-    private JButton loginButton;
-    private JButton registerButton;
     private AuthController authController;
     
     public LoginView() {
@@ -91,11 +89,11 @@ public class LoginView extends JFrame {
         JPanel buttonPanel = ArabicUIHelper.createPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
         buttonPanel.setBackground(new Color(245, 245, 245));
         
-        loginButton = ArabicUIHelper.createPrimaryButton("تسجيل الدخول");
+        JButton loginButton = ArabicUIHelper.createPrimaryButton("تسجيل الدخول");
         loginButton.setPreferredSize(new Dimension(140, 40));
         loginButton.addActionListener(e -> handleLogin());
         
-        registerButton = ArabicUIHelper.createSecondaryButton("تسجيل جديد");
+        JButton registerButton = ArabicUIHelper.createSecondaryButton("تسجيل جديد");
         registerButton.setPreferredSize(new Dimension(140, 40));
         registerButton.addActionListener(e -> openRegisterView());
         

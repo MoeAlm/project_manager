@@ -20,8 +20,6 @@ public class RegisterView extends JFrame {
     private JTextField emailField;
     private JTextField phoneField;
     private JComboBox<String> roleComboBox;
-    private JButton registerButton;
-    private JButton backButton;
     private AuthController authController;
     private LoginView loginView;
     
@@ -167,11 +165,11 @@ public class RegisterView extends JFrame {
         JPanel buttonPanel = ArabicUIHelper.createPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
         buttonPanel.setBackground(new Color(245, 245, 245));
         
-        registerButton = ArabicUIHelper.createSuccessButton("تسجيل");
+        JButton registerButton = ArabicUIHelper.createSuccessButton("تسجيل");
         registerButton.setPreferredSize(new Dimension(120, 38));
         registerButton.addActionListener(e -> handleRegister());
         
-        backButton = ArabicUIHelper.createSecondaryButton("رجوع");
+        JButton backButton = ArabicUIHelper.createSecondaryButton("رجوع");
         backButton.setPreferredSize(new Dimension(120, 38));
         backButton.addActionListener(e -> goBack());
         

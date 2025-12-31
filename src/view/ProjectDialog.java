@@ -1,6 +1,5 @@
 package view;
 
-import controller.ProjectController;
 import dao.ProjectDAO;
 import dao.UserDAO;
 import model.Project;
@@ -29,8 +28,6 @@ public class ProjectDialog extends JDialog {
     private JTextField endDateField;
     private JComboBox<String> statusComboBox;
     private JComboBox<User> managerComboBox;
-    private JButton saveButton;
-    private JButton cancelButton;
     
     private Project project;
     private boolean confirmed = false;
@@ -132,12 +129,12 @@ public class ProjectDialog extends JDialog {
         
         JPanel buttonPanel = ArabicUIHelper.createPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
         
-        saveButton = ArabicUIHelper.createSuccessButton("حفظ");
+        JButton saveButton = ArabicUIHelper.createSuccessButton("حفظ");
         saveButton.setPreferredSize(new Dimension(100, 35));
         saveButton.addActionListener(e -> save());
         buttonPanel.add(saveButton);
         
-        cancelButton = ArabicUIHelper.createSecondaryButton("إلغاء");
+        JButton cancelButton = ArabicUIHelper.createSecondaryButton("إلغاء");
         cancelButton.setPreferredSize(new Dimension(100, 35));
         cancelButton.addActionListener(e -> dispose());
         buttonPanel.add(cancelButton);
