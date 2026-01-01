@@ -171,7 +171,7 @@ public class MainDashboard extends JFrame {
         notificationBtn.setForeground(Color.WHITE);
         notificationBtn.setBackground(new Color(25, 118, 210));
         notificationBtn.setBorderPainted(false);
-        notificationBtn.addActionListener(e -> showNotifications());
+       notificationBtn.addActionListener(e -> showNotifications());
         userPanel.add(notificationBtn);
         
         JButton logoutBtn = ArabicUIHelper.createButton("تسجيل الخروج");
