@@ -244,7 +244,18 @@ public class TasksPanel extends JPanel {
             protected void done() {
                 try {
                     currentTasks = get();
-                    updateTable(currentTasks);
+                    if (currentTasks != null) {
+                        updateTable(currentTasks);
+                    }
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    System.err.println("Task loading interrupted: " + e.getMessage());
+                } catch (java.util.concurrent.ExecutionException e) {
+                    e.printStackTrace();
+                    Throwable cause = e.getCause();
+                    String errorMsg = cause != null ? cause.getMessage() : e.getMessage();
+                    ArabicUIHelper.showError(TasksPanel.this, 
+                        "خطأ في تحميل المهام: " + errorMsg, "خطأ");
                 } catch (Exception e) {
                     e.printStackTrace();
                     ArabicUIHelper.showError(TasksPanel.this, 

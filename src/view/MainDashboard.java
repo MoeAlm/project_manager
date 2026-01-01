@@ -186,6 +186,8 @@ public class MainDashboard extends JFrame {
         return headerPanel;
     }
     
+    private JPanel statsPanel;
+    
     private JPanel createDashboardPanel() {
         JPanel panel = ArabicUIHelper.createPanel(new BorderLayout(10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -205,8 +207,13 @@ public class MainDashboard extends JFrame {
         
         panel.add(welcomePanel, BorderLayout.NORTH);
         
-        JPanel statsPanel = ArabicUIHelper.createPanel(new GridLayout(2, 2, 15, 15));
+        statsPanel = ArabicUIHelper.createPanel(new GridLayout(2, 2, 15, 15));
         statsPanel.setOpaque(false);
+        
+        statsPanel.add(createStatCard("إجمالي المشاريع", "0", new Color(33, 150, 243)));
+        statsPanel.add(createStatCard("المشاريع النشطة", "0", new Color(76, 175, 80)));
+        statsPanel.add(createStatCard("إجمالي المهام", "0", new Color(156, 39, 176)));
+        statsPanel.add(createStatCard("المهام المتأخرة", "0", new Color(244, 67, 54)));
         
         panel.add(statsPanel, BorderLayout.CENTER);
         
@@ -268,32 +275,27 @@ public class MainDashboard extends JFrame {
     
     private void updateStatisticsCards(int totalProjects, int activeProjects, 
                                        int totalTasks, int overdueTasks) {
-        JPanel statsPanel = (JPanel) ((JPanel) dashboardPanel.getComponent(1)).getComponent(0);
         if (statsPanel == null) {
-            statsPanel = ArabicUIHelper.createPanel(new GridLayout(2, 2, 15, 15));
-            statsPanel.setOpaque(false);
+            return;
         }
-        statsPanel.removeAll();
         
-        statsPanel.add(createStatCard("إجمالي المشاريع", String.valueOf(totalProjects), 
-                                      new Color(33, 150, 243)));
-        statsPanel.add(createStatCard("المشاريع النشطة", String.valueOf(activeProjects), 
-                                      new Color(76, 175, 80)));
-        statsPanel.add(createStatCard("إجمالي المهام", String.valueOf(totalTasks), 
-                                      new Color(156, 39, 176)));
-        statsPanel.add(createStatCard("المهام المتأخرة", String.valueOf(overdueTasks), 
-                                      new Color(244, 67, 54)));
-        
-        Component centerComponent = ((BorderLayout) dashboardPanel.getLayout())
-            .getLayoutComponent(BorderLayout.CENTER);
-        if (centerComponent != null) {
-            dashboardPanel.remove(centerComponent);
-        }
-        dashboardPanel.add(statsPanel, BorderLayout.CENTER);
-        
-        dashboardPanel.revalidate();
-        dashboardPanel.repaint();
+        SwingUtilities.invokeLater(() -> {
+            statsPanel.removeAll();
+            
+            statsPanel.add(createStatCard("إجمالي المشاريع", String.valueOf(totalProjects), 
+                                          new Color(33, 150, 243)));
+            statsPanel.add(createStatCard("المشاريع النشطة", String.valueOf(activeProjects), 
+                                          new Color(76, 175, 80)));
+            statsPanel.add(createStatCard("إجمالي المهام", String.valueOf(totalTasks), 
+                                          new Color(156, 39, 176)));
+            statsPanel.add(createStatCard("المهام المتأخرة", String.valueOf(overdueTasks), 
+                                          new Color(244, 67, 54)));
+            
+            statsPanel.revalidate();
+            statsPanel.repaint();
+        });
     }
+    
     
     private JPanel createStatCard(String title, String value, Color color) {
         JPanel card = ArabicUIHelper.createPanel(new BorderLayout());
@@ -337,7 +339,7 @@ public class MainDashboard extends JFrame {
         String message = "نظام إدارة المشاريع\n" +
                         "الإصدار 1.0\n\n" +
                         "تم التطوير باستخدام Java Swing و PostgreSQL\n" +
-                        "جميع الحقوق محفوظة © 2024";
+                        "جميع الحقوق محفوظة © 2025";
         ArabicUIHelper.showInfo(this, message, "حول البرنامج");
     }
     

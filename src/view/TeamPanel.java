@@ -164,13 +164,15 @@ public class TeamPanel extends JPanel {
             protected void done() {
                 try {
                     List<Project> projects = get();
-                    projectFilter.removeAllItems();
-                    for (Project p : projects) {
-                        projectFilter.addItem(p);
-                    }
-                    if (!projects.isEmpty()) {
-                        selectedProject = projects.get(0);
-                        loadMembers(selectedProject.getId());
+                    if (projects != null) {
+                        projectFilter.removeAllItems();
+                        for (Project p : projects) {
+                            projectFilter.addItem(p);
+                        }
+                        if (!projects.isEmpty()) {
+                            selectedProject = projects.get(0);
+                            loadMembers(selectedProject.getId());
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
